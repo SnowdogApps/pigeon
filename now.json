@@ -1,0 +1,12 @@
+{
+    "version": 2,
+    "builds": [
+        { "src": "index.js", "use": "@now/node" },
+        { "src": "package.json", "use": "@now/static" }
+    ],
+    "env": {
+        "USER": "@user",
+        "PASS": "@pass",
+        "SERVICE": "Gmail"
+    }
+}

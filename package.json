@@ -1,0 +1,17 @@
+{
+  "name": "snowdog-website-mailer",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@lab.snowdog.pro:rob.wozniak/snowdog-website-mailer.git",
+  "author": "Robert Wozniak <robert.wozniak@snow.dog>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "micro"
+  },
+  "dependencies": {
+    "micro": "^9.3.3",
+    "multiparty": "^4.2.1",
+    "nodemailer": "^5.1.1"
+  }
+}
