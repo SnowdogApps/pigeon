@@ -6,9 +6,11 @@ const promisifyUpload = (req) => new Promise((resolve, reject) => {
   const form = new multiparty.Form()
 
   form.parse(req, (err, fields, files) => {
-      if (err) return reject(err)
+    if (err) {
+      return reject(err)
+    }
 
-      return resolve([fields, files])
+    return resolve([fields, files])
   })
 })
 
@@ -30,10 +32,12 @@ const mail = {
 
 module.exports = async (req, res) => {
   try {
-    if (req.method !== 'POST') throw ({
-      statusCode: 405,
-      message: 'Only post is allowed!'
-    })
+    if (req.method !== 'POST') {
+      throw ({
+        statusCode: 405,
+        message: 'Only post is allowed!'
+      })
+    }
 
     const [fields, files] = await promisifyUpload(req)
 
@@ -41,7 +45,9 @@ module.exports = async (req, res) => {
     mail.subject = fields.subject.toString()
     mail.html = `${fields.email} sent a message: ${fields.msg}`
     mail.attachments = files.file ? files.file.map(({ size, originalFilename, path }) => {
-      if (size) return { filename: originalFilename, path }
+      if (size) {
+        return { filename: originalFilename, path }
+      }
     }).filter(elem => elem) : []
 
     await transporter.sendMail(mail)
