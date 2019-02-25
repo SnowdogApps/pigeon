@@ -10,7 +10,6 @@
     "start": "micro"
   },
   "dependencies": {
-    "micro": "^9.3.3",
     "multiparty": "^4.2.1",
     "nodemailer": "^5.1.1"
   }

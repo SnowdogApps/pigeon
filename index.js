@@ -1,5 +1,4 @@
 const { USER, PASS, SERVICE } = process.env
-const { send, createError } = require('micro')
 const { createTransport } = require('nodemailer')
 const multiparty = require('multiparty')
 
@@ -31,7 +30,10 @@ const mail = {
 
 module.exports = async (req, res) => {
   try {
-    if (req.method !== 'POST') throw createError(405, 'Only post is allowed!')
+    if (req.method !== 'POST') throw ({
+      statusCode: 405,
+      message: 'Only post is allowed!'
+    })
 
     const [fields, files] = await promisifyUpload(req)
 
@@ -44,16 +46,9 @@ module.exports = async (req, res) => {
 
     await transporter.sendMail(mail)
   
-    send(res, 200, {
-      code: 200,
-      status: 'success',
-      message: 'sent with success'
-    })
+    res.end('Sent with success')
   } catch (err) {
-    send(res, err.statusCode, {
-      code: err.statusCode,
-      status: 'error',
-      message: err.message
-    })
+    res.statusCode = err.statusCode || 404
+    res.end(err.message)
   }
 }
