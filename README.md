@@ -27,3 +27,17 @@ All variables are registered in **now.json** file and are ready to use after dep
 ```
 const { USER, PASS, SERVICE } = process.env
 ```
+
+## Project configuration
+You can override config by update (creating) `mailer.json` config file in root directory.<br>
+You can also specify here to whom message will be delivered by adding to `definedRecipients` (in mentioned config file) corresponding values like: "form_code": "recipeint@mail.com". eg:
+```
+{
+    "definedRecipients": {
+        "helloForm": "robert.wozniak@snow.dog"
+    }
+}
+```
+
+## Local testing
+To test and expose mailer locally on you machine type `node now.js`
