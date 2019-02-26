@@ -1,57 +1,30 @@
-const { USER, PASS, SERVICE } = process.env
-const { createTransport } = require('nodemailer')
-const multiparty = require('multiparty')
-
-const promisifyUpload = (req) => new Promise((resolve, reject) => {
-  const form = new multiparty.Form()
-
-  form.parse(req, (err, fields, files) => {
-    if (err) {
-      return reject(err)
-    }
-
-    return resolve([fields, files])
-  })
-})
-
-const transporter = createTransport({
-  service: SERVICE,
-  secure: true,
-  auth: {
-    user: USER,
-    pass: PASS
-  }
-})
-
-const mail = {
-  from: USER,
-  to: USER,
-  subject: '',
-  html: ''
-}
+const fs = require('fs')
+const path = require('path')
+const send = require('./src/mailer')
+const parseFormData = require('./src/parse-form-data')
+const getConfig = require('./src/get-config')
 
 module.exports = async (req, res) => {
   try {
     if (req.method !== 'POST') {
       throw ({
         statusCode: 405,
-        message: 'Only post is allowed!'
+        message: 'Only post method is allowed!'
       })
     }
 
-    const [fields, files] = await promisifyUpload(req)
+    const localConfigPath = path.resolve(`${__dirname}/mailer.json`)
 
-    mail.cc = fields.copy ? fields.email : ''
-    mail.subject = fields.subject.toString()
-    mail.html = `${fields.email} sent a message: ${fields.msg}`
-    mail.attachments = files.file ? files.file.map(({ size, originalFilename, path }) => {
-      if (size) {
-        return { filename: originalFilename, path }
-      }
-    }).filter(elem => elem) : []
+    let localConfig = {}
+    if (fs.existsSync(localConfigPath)) {
+      localConfig = require(localConfigPath)
+    }
 
-    await transporter.sendMail(mail)
-  
+    const config = getConfig(localConfig)
+    const formData = await parseFormData(req)
+
+    await send(formData, config)
+
     res.end('Sent with success')
   } catch (err) {
     res.statusCode = err.statusCode || 404
