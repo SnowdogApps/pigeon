@@ -10,6 +10,7 @@
     "lint": "eslint **/*.js"
   },
   "dependencies": {
+    "lodash.defaultsdeep": "^4.6.0",
     "multiparty": "^4.2.1",
     "nodemailer": "^5.1.1"
   },
