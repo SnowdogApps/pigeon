@@ -29,13 +29,13 @@ const { USER, PASS, SERVICE } = process.env
 ```
 
 ## Project configuration
-You can override config by update (creating) `mailer.json` config file in root directory.<br>
+You can override config by update (creating) `config.json` config file in root directory.<br>
 You can also specify here to whom message will be delivered by adding to `definedRecipients` (in mentioned config file) corresponding values like: "form_code": "recipeint@mail.com". eg:
 ```js
 {
-    "definedRecipients": {
-        "helloForm": "robert.wozniak@snow.dog"
-    }
+  "definedRecipients": {
+    "helloForm": "robert.wozniak@snow.dog"
+  }
 }
 ```
 

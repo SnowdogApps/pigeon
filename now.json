@@ -1,11 +1,11 @@
 {
-    "version": 2,
-    "builds": [
-        { "src": "index.js", "use": "@now/node" }
-    ],
-    "env": {
-        "USER": "@user",
-        "PASS": "@pass",
-        "SERVICE": "Gmail"
-    }
+  "version": 2,
+  "builds": [
+    { "src": "index.js", "use": "@now/node" }
+  ],
+  "env": {
+    "USER": "@user",
+    "PASS": "@pass",
+    "SERVICE": "Gmail"
+  }
 }
