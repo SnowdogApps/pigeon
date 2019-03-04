@@ -5,7 +5,7 @@ Allows to send the complete form data (with files) within **POST** method.
 - allowed methods: **POST** only
 - allowed inputs[name]: **email**, **msg**, **subject**, **copy** and **file**
 
-## Deploy ([now.sh](https://zeit.co/now))
+## Deploy to ([now.sh](https://zeit.co/now))
 Install the latest version of Now CLI - `npm install -g now`
 Type `now` in the project root directory to start deploy changes.
 
@@ -40,4 +40,4 @@ You can also specify here to whom message will be delivered by adding to `define
 ```
 
 ## Local testing
-To test and expose mailer locally on you machine type `node now.js`
+To test and expose mailer locally on you machine type `yarn dev` / `npm run dev`

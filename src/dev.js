@@ -1,6 +1,6 @@
 const http = require('http');
 const path = require('path');
-const mailer = require('./index.js');
+const mailer = require('../index.js');
 
 const server = http.createServer(async (req, res) => {
   if (req.url === path.normalize('/')) {
@@ -22,3 +22,5 @@ const server = http.createServer(async (req, res) => {
 });
 
 server.listen(8080, '127.0.0.1');
+
+console.log('Listening on: http://localhost:8080') // eslint-disable-line no-console
