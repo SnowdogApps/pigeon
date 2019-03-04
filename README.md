@@ -11,11 +11,11 @@ Type `now` in the project root directory to start deploy changes.
 
 ## Project variables
 
-- user - email account address
-- pass - password to the email account
-- service - email provider like 'Gmail', 'Zoho' etc - list of all well-known supported services avaiable [here.](https://nodemailer.com/smtp/well-known/)
+- `user` - email account address
+- `pass` - password to the email account
+- `service` - email provider like Gmail, Zoho etc - [list of all supported services.](https://nodemailer.com/smtp/well-known/)
 
-From security reasons you should add **user** and **password** related variables as a [secret variables](https://zeit.co/blog/environment-variables-secrets):
+From security reasons you should add **user** and **password** related variables as a [secret variables](https://zeit.co/docs/v2/deployments/environment-variables-and-secrets/):
 
 ### How to add secret variables to project
 ```
