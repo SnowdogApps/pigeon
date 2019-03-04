@@ -1,14 +1,13 @@
 {
-  "name": "snowdog-website-mailer",
-  "version": "1.0.0",
-  "main": "index.js",
-  "repository": "git@lab.snowdog.pro:rob.wozniak/snowdog-website-mailer.git",
+  "name": "@snowdog/pigeon",
+  "version": "1.0.0-rc.0",
+  "repository": "https://github.com/snowdogApps/pigeon",
   "author": "Robert Wozniak <robert.wozniak@snow.dog>",
   "license": "MIT",
-  "private": true,
+  "main": "index.js",
   "scripts": {
-    "lint": "eslint **/*.js",
-    "dev": "node ./src/dev.js"
+    "dev": "node ./src/dev.js",
+    "lint": "eslint **/*.js"
   },
   "dependencies": {
     "lodash.defaultsdeep": "^4.6.0",
