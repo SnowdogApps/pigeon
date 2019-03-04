@@ -4,6 +4,15 @@ const send = require('./src/mailer')
 const parseFormData = require('./src/parse-form-data')
 const getConfig = require('./src/get-config')
 
+const localConfigPath = path.resolve(__dirname, 'config.json')
+
+let localConfig = {}
+if (fs.existsSync(localConfigPath)) {
+  localConfig = require(localConfigPath)
+}
+
+const config = getConfig(localConfig)
+
 module.exports = async (req, res) => {
   try {
     if (req.method !== 'POST') {
@@ -13,14 +22,6 @@ module.exports = async (req, res) => {
       })
     }
 
-    const localConfigPath = path.resolve(`${__dirname}/mailer.json`)
-
-    let localConfig = {}
-    if (fs.existsSync(localConfigPath)) {
-      localConfig = require(localConfigPath)
-    }
-
-    const config = getConfig(localConfig)
     const formData = await parseFormData(req)
 
     await send(formData, config)
