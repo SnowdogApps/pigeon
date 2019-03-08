@@ -1,34 +1,34 @@
-const { createTransport } = require('nodemailer')
+const parseFormData = require('./parse-form-data')
+const { createTransport, getTestMessageUrl } = require('nodemailer')
 
-module.exports = async (form, config) => {
-  try {
-    const transporter = createTransport(config.transport)
-    await transporter.verify()
+module.exports = async (request, config, isDev) => {
+  const transporter = createTransport(config.transport)
+  await transporter.verify()
 
-    const [fields, files] = form
-    const mail = {
-      ...config.message
+  const [fields, files] = await parseFormData(request)
+
+  const date = new Date()
+  fields.date = date.toLocaleString(config.locale)
+
+  if (request.connection.remoteAddress) {
+    fields.ip = request.connection.remoteAddress
+  }
+
+  if (request.headers.referer) {
+    fields.page = request.headers.referer
+  }
+
+  const mail = config.mail(fields)
+
+  mail.attachments = files.file ? files.file.map(({ size, originalFilename, path }) => {
+    if (size) {
+      return { filename: originalFilename, path }
     }
+  }).filter(elem => elem) : []
 
-    // mail.cc = fields.copy ? fields.sender : ''
-    // mail.subject = fields.subject ? fields.subject.toString() : 'No subject defined'
+  const info = await transporter.sendMail(mail)
 
-    // mail.html = Object.keys(fields).map(key => {
-    //   return `<p><strong>${key}:</strong> ${fields[key].toString()}</p>`
-    // }).join(' ')
-
-    mail.attachments = files.file ? files.file.map(({ size, originalFilename, path }) => {
-      if (size) {
-        return { filename: originalFilename, path }
-      }
-    }).filter(elem => elem) : []
-
-    await transporter.sendMail(mail)
-
-  } catch (err) {
-    throw ({
-      statusCode: err.statusCode || 404,
-      message: err.message
-    })
+  if (isDev) {
+    console.log('Email sent! Preview URL: ' + getTestMessageUrl(info)) // eslint-disable-line no-console
   }
 }

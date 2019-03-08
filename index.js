@@ -1,3 +1,7 @@
-const app = require('./src/app')
+const send = require('./src/api/send')
+const form = require('./src/api/form')
 
-module.exports = app
+module.exports = {
+  send,
+  form
+}

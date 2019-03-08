@@ -1,33 +1,40 @@
-const fs = require('fs')
 const path = require('path')
 const http = require('http')
-const app = require('./app')
+const { createTestAccount } = require('nodemailer')
 
-const localConfigPath = path.resolve(__dirname, '../config.json')
+const send = require('./api/send')
+const form = require('./api/form')
 
-let localConfig = {}
-if (fs.existsSync(localConfigPath)) {
-  localConfig = require(localConfigPath)
-}
+;(async () => {
+  const testAccount = await createTestAccount()
 
-const server = http.createServer(async (req, res) => {
-  if (req.url === '/') {
-    res.end('This connection is alive!')
-  } else if (req.url === '/send') {
-    try {
-      await app(localConfig)(req, res)
+  const config = require(path.resolve(__dirname, '../pigeon.config.js'))
 
-      res.end('Sent with success')
-    } catch (err) {
-      res.statusCode = err.statusCode || 404
-      res.end(err.message)
+  config.transport = {
+    host: testAccount.smtp.host,
+    port: testAccount.smtp.port,
+    secure: testAccount.smtp.secure,
+    auth: {
+      user: testAccount.user,
+      pass: testAccount.pass
     }
-  } else {
-    res.writeHead(404, { 'Content-Type': 'text/plain' })
-    res.end('this page doesn\'t exist')
   }
-})
 
-server.listen(8080, '127.0.0.1')
+  const server = http.createServer(async (req, res) => {
+    if (req.url === '/send') {
+      await send(config, true)(req, res)
+      res.end('Sent with success')
+    }
+    else if (req.url === '/form') {
+      form(config, true)(req, res)
+    }
+    else {
+      res.writeHead(404, { 'Content-Type': 'text/plain' })
+      res.end('this page doesn\'t exist')
+    }
+  })
 
-console.log('Listening on: http://localhost:8080') // eslint-disable-line no-console
+  server.listen(config.dev.port, '127.0.0.1')
+
+  console.log(`Listening on: http://localhost:${config.dev.port}`) // eslint-disable-line no-console
+})()
