@@ -58,4 +58,5 @@ jspm_packages/
 .env
 
 # local
-config.json
+pigeon.config.js
+now.json
