@@ -1,8 +1,9 @@
 const cors = require('../cors')
 const mailer = require('../mailer')
+const getConfig = require('../get-config')
 
-module.exports = (config, isDev = false) => async (req, res) => {
-
+module.exports = (localConfig = {}, isDev = false) => async (req, res) => {
+  const config = getConfig(localConfig)
   try {
     cors(req, res, config, isDev)
     if (req.method === 'POST') {

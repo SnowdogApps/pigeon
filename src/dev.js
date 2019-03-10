@@ -4,13 +4,15 @@ const { createTestAccount } = require('nodemailer')
 
 const send = require('./api/send')
 const form = require('./api/form')
+const getConfig = require('./get-config')
+
+const localConfig = require(path.resolve(__dirname, '../pigeon.config.js')) || {}
+const config = getConfig(localConfig)
 
 ;(async () => {
   const testAccount = await createTestAccount()
 
-  const config = require(path.resolve(__dirname, '../pigeon.config.js'))
-
-  config.transport = {
+  localConfig.transport = {
     host: testAccount.smtp.host,
     port: testAccount.smtp.port,
     secure: testAccount.smtp.secure,
@@ -22,11 +24,11 @@ const form = require('./api/form')
 
   const server = http.createServer(async (req, res) => {
     if (req.url === '/send') {
-      await send(config, true)(req, res)
+      await send(localConfig, true)(req, res)
       res.end('Sent with success')
     }
     else if (req.url === '/form') {
-      form(config, true)(req, res)
+      form(localConfig, true)(req, res)
     }
     else {
       res.writeHead(404, { 'Content-Type': 'text/plain' })
