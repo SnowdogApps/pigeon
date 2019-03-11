@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "api/form.js", "use": "@now/node" },
+    { "src": "api/send.js", "use": "@now/node" },
+    { "use": "@now/static-build", "src": "package.json" }
+  ],
+  "routes": [
+    { "src": "/api/form", "dest": "/api/form.js" },
+    { "src": "/api/send", "dest": "/api/send.js" }
+  ],
+  "env": {
+    "SERVICE": "Mailgun",
+    "USER": "@mailgun-user",
+    "PASS": "@mailgun-password"
+  }
+}
