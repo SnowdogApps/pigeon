@@ -84,7 +84,7 @@ By default we are taking ENV variables `SERVICE`, `USER` and `PASS` to hydrate i
 
 `cors` is used to set `Access-Control-Allow-Origin` header acordingly to the settings.
 
-For security reasons you shouldn't keep **user** and **password** directly in the config file, but for example keep them as a [secret variables](https://zeit.co/docs/v2/deployments/environment-variables-and-secrets/) if you are using Now.js.
+For security reasons you shouldn't keep **user** and **password** directly in the config file, but for example keep them as a [secret variables](https://zeit.co/docs/v2/deployments/environment-variables-and-secrets/) if you are using [Now.sh](https://now.sh/).
 
 ## Local testing
 To test and expose mailer locally on you machine run `yarn dev` / `npm run dev`
