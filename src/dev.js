@@ -10,7 +10,7 @@ const getConfig = require('./get-config')
 module.exports = async () => {
   let localConfig = {}
 
-  const localConfigPath = path.resolve(__dirname, '../pigeon.config.js')
+  const localConfigPath = path.resolve('./pigeon.config.js')
   if (fs.existsSync(localConfigPath)) {
     localConfig = require(localConfigPath)
   }
