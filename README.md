@@ -24,7 +24,7 @@ axios({
   method: 'post',
   url: '/send',
   data: bodyFormData,
-  config: { headers: {'Content-Type': 'multipart/form-data' }}
+  config: { headers: { 'Content-Type': 'multipart/form-data' } }
 })
 ```
 

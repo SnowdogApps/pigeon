@@ -1,6 +1,6 @@
 module.exports = (request, response, config, isDev = false) => {
   const origin = request.headers.origin
-  const allowedOrigins = config.allowedOrigins
+  const allowedOrigins = config.cors.allowedOrigins
 
   if (isDev) {
     response.setHeader('Access-Control-Allow-Origin', '*')
