@@ -1,4 +1,5 @@
 const path = require('path')
+const fs = require('fs')
 const http = require('http')
 const { createTestAccount } = require('nodemailer')
 
@@ -6,7 +7,13 @@ const send = require('./api/send')
 const form = require('./api/form')
 const getConfig = require('./get-config')
 
-const localConfig = require(path.resolve(__dirname, '../pigeon.config.js')) || {}
+let localConfig = {}
+
+const localConfigPath = path.resolve(__dirname, '../pigeon.config.js')
+if (fs.existsSync(localConfigPath)) {
+  localConfig = require(localConfigPath)
+}
+
 const config = getConfig(localConfig)
 
 ;(async () => {
