@@ -7,16 +7,16 @@ const send = require('./api/send')
 const form = require('./api/form')
 const getConfig = require('./get-config')
 
-let localConfig = {}
+module.exports = async () => {
+  let localConfig = {}
 
-const localConfigPath = path.resolve(__dirname, '../pigeon.config.js')
-if (fs.existsSync(localConfigPath)) {
-  localConfig = require(localConfigPath)
-}
+  const localConfigPath = path.resolve(__dirname, '../pigeon.config.js')
+  if (fs.existsSync(localConfigPath)) {
+    localConfig = require(localConfigPath)
+  }
 
-const config = getConfig(localConfig)
+  const config = getConfig(localConfig)
 
-;(async () => {
   const testAccount = await createTestAccount()
 
   localConfig.transport = {
@@ -46,4 +46,4 @@ const config = getConfig(localConfig)
   server.listen(config.dev.port, '127.0.0.1')
 
   console.log(`Listening on: http://localhost:${config.dev.port}`) // eslint-disable-line no-console
-})()
+}
