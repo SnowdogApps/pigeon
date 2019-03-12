@@ -150,9 +150,8 @@ export default {
         this.status = 'is-success'
         this.message = data
       } catch (error) {
-        console.log({ error }) // eslint-disable-line no-console
         this.status = 'is-danger'
-        this.message = error
+        this.message = error.response.data || error
       }
     }
   }
