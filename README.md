@@ -13,6 +13,11 @@ Simple open-source serverless API for sending emails and building forms effortle
 - **No Admin Panel** - You are not limited by the UI or poor UX, just you and one JS config file
 - **Front-end agnostic** - Simple REST API can be used by any application
 
+## Demo
+[Demo](https://pigeon.now.sh/)
+
+[Source code](/examples/now)
+
 ## API
 ### `POST /send`
 Endpoint used to handle form submits
