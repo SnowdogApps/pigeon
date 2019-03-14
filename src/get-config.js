@@ -38,9 +38,6 @@ module.exports = (formId, localConfig = {}) => {
   // Get a single form by ID
   const form = config.forms[formId] || null
 
-  // Remove not necessary forms from config
-  delete config.forms
-
   // Spread merged cofnig and selected form to new object
   return {
     ...config,
