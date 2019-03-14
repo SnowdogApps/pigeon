@@ -7,6 +7,7 @@ const { createTestAccount } = require('nodemailer')
 const get = require('./api/get')
 const post = require('./api/post')
 const getConfig = require('./get-config')
+const cors = require('./cors')
 
 module.exports = async () => {
   let localConfig = {}
@@ -37,6 +38,8 @@ module.exports = async () => {
       response.end('this page doesn\'t exist')
       return
     }
+
+    cors(request, response, config, true)
 
     if (request.method === 'GET') {
       get(localConfig, true)(request, response)

@@ -29,10 +29,8 @@ axios({
   method: 'post',
   url: '/',
   data: bodyFormData,
-  config: {
-    headers: { 'Content-Type': 'multipart/form-data' },
-    params: { id: 'myFormId' }
-  }
+  headers: { 'Content-Type': 'multipart/form-data' },
+  params: { id: 'myFormId' }
 })
 ```
 
