@@ -119,7 +119,10 @@ export default {
     }
   },
   async mounted() {
-    const { data } = await this.$axios.get(`${process.env.api}/form`)
+    const { data } = await this.$axios.get(
+      `${process.env.api}`,
+      { params: { id: 'demo' } }
+    )
     this.fields = data
   },
   methods: {
@@ -142,9 +145,10 @@ export default {
       try {
         const { data } = await this.$axios({
           method: 'post',
-          url: `${process.env.api}/send`,
+          url: `${process.env.api}`,
           data: bodyFormData,
-          config: { headers: { 'Content-Type': 'multipart/form-data' } }
+          headers: { 'Content-Type': 'multipart/form-data' },
+          params: { id: 'demo' }
         })
 
         this.status = 'is-success'

@@ -4,6 +4,6 @@
     "dev": "pigeon dev"
   },
   "dependencies": {
-    "@snowdog/pigeon": "^1.0.0-rc.3"
+    "@snowdog/pigeon": "^1.0.0-rc.5"
   }
 }

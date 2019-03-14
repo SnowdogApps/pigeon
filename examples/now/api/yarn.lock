@@ -2,12 +2,13 @@
 # yarn lockfile v1
 
 
-"@snowdog/pigeon@^1.0.0-rc.3":
-  version "1.0.0-rc.3"
-  resolved "https://registry.yarnpkg.com/@snowdog/pigeon/-/pigeon-1.0.0-rc.3.tgz#93b4c52ec46fea7869277dbde8de361ae14c42f9"
-  integrity sha512-GL1me+K8O821oD2NHPoPLKYzJzDXxhta7MD87R54xj5YpVCMqMEmmbDvuXWC6oT9eDjWw++H5qOOlJ1pVQx1cw==
+"@snowdog/pigeon@^1.0.0-rc.5":
+  version "1.0.0-rc.5"
+  resolved "https://registry.yarnpkg.com/@snowdog/pigeon/-/pigeon-1.0.0-rc.5.tgz#4798ac60418e69a061ec16a0c9ef34998b2cd8bd"
+  integrity sha512-Ck6X6SZD1dgbP5uNBPEJEszriidm7E8oVb3SfzhT23uoOwv4Y0KoyT938SL83ObkMMGvyQZUC21NhaP4+Dv5bA==
   dependencies:
     lodash.defaultsdeep "^4.6.0"
+    lodash.flatten "^4.4.0"
     multiparty "^4.2.1"
     nodemailer "^5.1.1"
 
@@ -43,6 +44,11 @@ lodash.defaultsdeep@^4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/lodash.defaultsdeep/-/lodash.defaultsdeep-4.6.0.tgz#bec1024f85b1bd96cbea405b23c14ad6443a6f81"
   integrity sha1-vsECT4WxvZbL6kBbI8FK1kQ6b4E=
+
+lodash.flatten@^4.4.0:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/lodash.flatten/-/lodash.flatten-4.4.0.tgz#f31c22225a9632d2bbf8e4addbef240aa765a61f"
+  integrity sha1-8xwiIlqWMtK7+OSt2+8kCqdlph8=
 
 multiparty@^4.2.1:
   version "4.2.1"
