@@ -1,10 +1,11 @@
+const { parse } = require('url')
 const path = require('path')
 const fs = require('fs')
 const http = require('http')
 const { createTestAccount } = require('nodemailer')
 
-const send = require('./api/send')
-const form = require('./api/form')
+const send = require('./api/post')
+const form = require('./api/get')
 const getConfig = require('./get-config')
 
 module.exports = async () => {
@@ -29,17 +30,20 @@ module.exports = async () => {
     }
   }
 
-  const server = http.createServer(async (req, res) => {
-    if (req.url === '/send') {
-      await send(localConfig, true)(req, res)
-      res.end('Sent with success')
+  const server = http.createServer(async (request, response) => {
+    const pathName = parse(request.url).pathname
+    if (pathName !== '/') {
+      response.writeHead(404, { 'Content-Type': 'text/plain' })
+      response.end('this page doesn\'t exist')
+      return
     }
-    else if (req.url === '/form') {
-      form(localConfig, true)(req, res)
+
+    if (request.method === 'POST') {
+      await send(localConfig, true)(request, response)
     }
-    else {
-      res.writeHead(404, { 'Content-Type': 'text/plain' })
-      res.end('this page doesn\'t exist')
+
+    if (request.method === 'GET') {
+      form(localConfig, true)(request, response)
     }
   })
 

@@ -19,7 +19,7 @@ Simple open-source serverless API for sending emails and building forms effortle
 [Source code](/examples/now)
 
 ## API
-### `POST /send`
+### `POST /`
 Endpoint used to handle form submits
 
 ```js
@@ -27,17 +27,17 @@ const form = document.querySelector('#form')
 const bodyFormData =  new FormData(form)
 axios({
   method: 'post',
-  url: '/send',
+  url: '/',
   data: bodyFormData,
   config: { headers: { 'Content-Type': 'multipart/form-data' } }
 })
 ```
 
-### `GET /form`
+### `GET /`
 Get configuration of form fields
 
 ```js
-const { data } = axios.get('/form')
+const { data } = axios.get('/')
 console.log(data)
 // [
 //   {

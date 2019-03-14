@@ -1,0 +1,20 @@
+const { parse } = require('url')
+
+const cors = require('../cors')
+const mailer = require('../mailer')
+const getConfig = require('../get-config')
+
+module.exports = (localConfig = {}, isDev = false) => async (request, response) => {
+  const params = parse(request.url, true).query
+  const config = getConfig(params.id, localConfig)
+
+  try {
+    cors(request, response, config, isDev)
+    if (request.method === 'POST') {
+      await mailer(request, response, config, isDev)
+    }
+  } catch (err) {
+    response.statusCode = err.statusCode || 404
+    response.end(err.message)
+  }
+}
