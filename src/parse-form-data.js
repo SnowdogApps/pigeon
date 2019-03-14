@@ -1,9 +1,9 @@
 const multiparty = require('multiparty')
 
-module.exports = (req) => new Promise((resolve, reject) => {
+module.exports = (request) => new Promise((resolve, reject) => {
   const form = new multiparty.Form()
 
-  form.parse(req, (err, fields, files) => {
+  form.parse(request, (err, fields, files) => {
     if (err) {
       return reject(err)
     }
