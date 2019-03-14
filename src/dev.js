@@ -4,8 +4,8 @@ const fs = require('fs')
 const http = require('http')
 const { createTestAccount } = require('nodemailer')
 
-const send = require('./api/post')
-const form = require('./api/get')
+const get = require('./api/get')
+const post = require('./api/post')
 const getConfig = require('./get-config')
 
 module.exports = async () => {
@@ -38,12 +38,12 @@ module.exports = async () => {
       return
     }
 
-    if (request.method === 'POST') {
-      await send(localConfig, true)(request, response)
+    if (request.method === 'GET') {
+      get(localConfig, true)(request, response)
     }
 
-    if (request.method === 'GET') {
-      form(localConfig, true)(request, response)
+    if (request.method === 'POST') {
+      await post(localConfig, true)(request, response)
     }
   })
 
