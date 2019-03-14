@@ -18,17 +18,32 @@ const defaults = {
       pass: PASS
     }
   },
-  mail: (params) => ({
-    from: 'noreply@test.dev',
-    to: 'noreply@test.dev',
-    subject: 'Default subject',
-    text: Object.keys(params).map(key => `${key}: ${params[key]}\n`).join('')
-  }),
-  form: {
-    fields: []
+  forms: {
+    default: {
+      mail: (params) => ({
+        from: 'noreply@test.dev',
+        to: 'noreply@test.dev',
+        subject: 'Default subject',
+        text: Object.keys(params).map(key => `${key}: ${params[key]}\n`).join('')
+      }),
+      fields: []
+    }
   }
 }
 
-module.exports = (config = {}) => {
-  return defaultsDeep(config, defaults)
+module.exports = (formId, localConfig = {}) => {
+  // Merge defaults with local config
+  const config = defaultsDeep(localConfig, defaults)
+
+  // Get a single form by ID
+  const form = config.forms[formId] || null
+
+  // Remove not necessary forms from config
+  delete config.forms
+
+  // Spread merged cofnig and selected form to new object
+  return {
+    ...config,
+    ...form
+  }
 }

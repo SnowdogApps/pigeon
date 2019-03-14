@@ -29,7 +29,10 @@ axios({
   method: 'post',
   url: '/',
   data: bodyFormData,
-  config: { headers: { 'Content-Type': 'multipart/form-data' } }
+  config: {
+    headers: { 'Content-Type': 'multipart/form-data' },
+    params: { id: 'myFormId' }
+  }
 })
 ```
 
@@ -37,7 +40,7 @@ axios({
 Get configuration of form fields
 
 ```js
-const { data } = axios.get('/')
+const { data } = axios.get('/', { params: { id: 'myFormId' } })
 console.log(data)
 // [
 //   {
@@ -70,14 +73,16 @@ Defaults
       pass: PASS
     }
   },
-  mail: (params) => ({
-    from: 'noreply@test.dev',
-    to: 'noreply@test.dev',
-    subject: 'Default subject',
-    text: Object.keys(params).map(key => `${key}: ${params[key]}\n`).join('')
-  }),
-  form: {
-    fields: []
+  forms: {
+    default: {
+      mail: (params) => ({
+        from: 'noreply@test.dev',
+        to: 'noreply@test.dev',
+        subject: 'Default subject',
+        text: Object.keys(params).map(key => `${key}: ${params[key]}\n`).join('')
+      }),
+      fields: []
+    }
   }
 }
 ```
@@ -88,6 +93,8 @@ You can overwrite each part of this config by creating `pigeon.config.js`.
 By default, we are taking ENV variables `SERVICE`, `USER` and `PASS` to hydrate it.
 
 `cors` is used to set `Access-Control-Allow-Origin` header acordingly to the settings.
+
+`forms` object keys are used as IDs in requests params.
 
 For security reasons you shouldn't keep **user** and **password** directly in the config file, but for example, keep them as a [secret variables](https://zeit.co/docs/v2/deployments/environment-variables-and-secrets/) if you are using [Now.sh](https://now.sh/).
 
