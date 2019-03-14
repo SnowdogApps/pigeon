@@ -1,4 +1,4 @@
-const parseFormData = require('./parse-form-data')
+const flatten = require('lodash.flatten')
 const { createTransport, getTestMessageUrl } = require('nodemailer')
 const parseFormData = require('./parse-form-data')
 
@@ -21,10 +21,12 @@ module.exports = async (request, response, config, isDev) => {
 
   const mail = config.mail(fields)
 
-  mail.attachments = files.file ? files.file.map(({ size, originalFilename, path }) => {
-    if (size) {
-      return { filename: originalFilename, path }
-    }
+  if (Object.keys(files).length) {
+    const attachments = flatten(Object.keys(files).map(key => files[key]))
+    mail.attachments = attachments.map(
+      file => ({ filename: file.originalFilename, path: file.path })
+    )
+  }
 
   const info = await transporter.sendMail(mail)
 
