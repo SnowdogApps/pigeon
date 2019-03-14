@@ -1,7 +1,8 @@
 const parseFormData = require('./parse-form-data')
 const { createTransport, getTestMessageUrl } = require('nodemailer')
+const parseFormData = require('./parse-form-data')
 
-module.exports = async (request, config, isDev) => {
+module.exports = async (request, response, config, isDev) => {
   const transporter = createTransport(config.transport)
   await transporter.verify()
 
@@ -24,11 +25,15 @@ module.exports = async (request, config, isDev) => {
     if (size) {
       return { filename: originalFilename, path }
     }
-  }).filter(elem => elem) : []
 
   const info = await transporter.sendMail(mail)
 
-  if (isDev) {
-    console.log('Email sent! Preview URL: ' + getTestMessageUrl(info)) // eslint-disable-line no-console
+  if (!isDev) {
+    response.end('Sent with success')
+  }
+  else {
+    const message = 'Email sent! Preview URL: ' + getTestMessageUrl(info)
+    console.log(message) // eslint-disable-line no-console
+    response.end(message)
   }
 }
