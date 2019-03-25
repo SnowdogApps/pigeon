@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@snowdog/pigeon@^1.0.0-rc.5":
-  version "1.0.0-rc.5"
-  resolved "https://registry.yarnpkg.com/@snowdog/pigeon/-/pigeon-1.0.0-rc.5.tgz#4798ac60418e69a061ec16a0c9ef34998b2cd8bd"
-  integrity sha512-Ck6X6SZD1dgbP5uNBPEJEszriidm7E8oVb3SfzhT23uoOwv4Y0KoyT938SL83ObkMMGvyQZUC21NhaP4+Dv5bA==
+"@snowdog/pigeon@^1.0.0-rc.6":
+  version "1.0.0-rc.6"
+  resolved "https://registry.yarnpkg.com/@snowdog/pigeon/-/pigeon-1.0.0-rc.6.tgz#4e82873ca01dd06796dae61ac12a8e85ffb5a16e"
+  integrity sha512-/YOfQKQV3RaG3hXMVR/wB4BIpnKg/FD8RF0P5MsGSrnbF4rTXY1qcLpBvTIXO45xd6Zo0rCLFPwJiH32pRMmbQ==
   dependencies:
     lodash.defaultsdeep "^4.6.0"
     lodash.flatten "^4.4.0"
