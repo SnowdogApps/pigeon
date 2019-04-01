@@ -57,7 +57,7 @@
                 v-model="file"
                 :required="field.required"
               >
-                <a class="button is-secondary">
+                <a class="tag is-secondary">
                   <b-icon icon="upload" />
                   <span>
                     Click to upload
@@ -66,9 +66,14 @@
               </b-upload>
               <span
                 v-if="file"
-                class="file-name"
+                class="tag is-primary"
               >
                 {{ file.name }}
+                <button
+                  @click="deleteFile()"
+                  class="delete is-small"
+                  type="button"
+                />
               </span>
             </b-field>
           </template>
@@ -134,6 +139,9 @@ export default {
     },
     isCheckbox(type) {
       return type === 'checkbox'
+    },
+    deleteFile() {
+      this.file = null
     },
     async submit(event) {
       event.preventDefault()
