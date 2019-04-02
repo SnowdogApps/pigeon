@@ -53,6 +53,7 @@
               class="file"
             >
               <b-upload
+                v-show="!file"
                 :name="field.name"
                 v-model="file"
                 :required="field.required"
@@ -70,7 +71,7 @@
               >
                 {{ file.name }}
                 <button
-                  @click="deleteFile()"
+                  @click="file = null"
                   class="delete is-small"
                   type="button"
                 />
@@ -139,9 +140,6 @@ export default {
     },
     isCheckbox(type) {
       return type === 'checkbox'
-    },
-    deleteFile() {
-      this.file = null
     },
     async submit(event) {
       event.preventDefault()
