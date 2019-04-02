@@ -53,11 +53,12 @@
               class="file"
             >
               <b-upload
+                v-show="!file"
                 :name="field.name"
                 v-model="file"
                 :required="field.required"
               >
-                <a class="button is-secondary">
+                <a class="tag is-secondary">
                   <b-icon icon="upload" />
                   <span>
                     Click to upload
@@ -66,9 +67,14 @@
               </b-upload>
               <span
                 v-if="file"
-                class="file-name"
+                class="tag is-primary"
               >
                 {{ file.name }}
+                <button
+                  @click="file = null"
+                  class="delete is-small"
+                  type="button"
+                />
               </span>
             </b-field>
           </template>
