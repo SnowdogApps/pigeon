@@ -54,8 +54,8 @@
             >
               <b-upload
                 v-show="!file"
-                :name="field.name"
                 v-model="file"
+                :name="field.name"
                 :required="field.required"
               >
                 <a class="tag is-secondary">
@@ -71,9 +71,9 @@
               >
                 {{ file.name }}
                 <button
-                  @click="file = null"
                   class="delete is-small"
                   type="button"
+                  @click="file = null"
                 />
               </span>
             </b-field>
