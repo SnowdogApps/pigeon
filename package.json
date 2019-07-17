@@ -14,11 +14,7 @@
   ],
   "license": "MIT",
   "main": "index.js",
-  "bin": {
-    "pigeon": "./bin/pigeon.js"
-  },
   "scripts": {
-    "dev": "./bin/pigeon.js dev",
     "lint": "eslint **/*.js"
   },
   "dependencies": {

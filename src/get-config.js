@@ -1,4 +1,5 @@
 const defaultsDeep = require('lodash.defaultsdeep')
+const { createTestAccount } = require('nodemailer')
 
 const { USER, PASS, SERVICE } = process.env
 
@@ -31,9 +32,23 @@ const defaults = {
   }
 }
 
-module.exports = (formId, localConfig = {}) => {
+module.exports = async (formId, localConfig = {}, isDev = false) => {
   // Merge defaults with local config
   const config = defaultsDeep(localConfig, defaults)
+
+  if (isDev) {
+    const testAccount = await createTestAccount()
+
+    config.transport = {
+      host: testAccount.smtp.host,
+      port: testAccount.smtp.port,
+      secure: testAccount.smtp.secure,
+      auth: {
+        user: testAccount.user,
+        pass: testAccount.pass
+      }
+    }
+  }
 
   // Get a single form by ID
   const form = config.forms[formId] || null

@@ -10,6 +10,7 @@
     { "src": "/api/form", "dest": "/api/post.js", "methods": ["POST"] }
   ],
   "env": {
+    "IS_DEV": false,
     "SERVICE": "Mailgun",
     "USER": "@mailgun-user",
     "PASS": "@mailgun-password"
