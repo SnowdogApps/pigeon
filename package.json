@@ -21,7 +21,7 @@
     "lodash.defaultsdeep": "^4.6.0",
     "lodash.flatten": "^4.4.0",
     "multiparty": "^4.2.1",
-    "nodemailer": "^5.1.1"
+    "nodemailer": "^6.4.16"
   },
   "devDependencies": {
     "eslint": "^5.15.1"
