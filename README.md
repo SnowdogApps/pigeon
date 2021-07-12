@@ -16,7 +16,7 @@ Simple open-source serverless API for sending emails and building forms effortle
 ## Demo
 [Demo](https://pigeon.now.sh/)
 
-[Source code](/examples/now)
+[Source code](/examples/vercel)
 
 ## API
 ### `POST /`
@@ -94,7 +94,7 @@ By default, we are taking ENV variables `SERVICE`, `USER` and `PASS` to hydrate 
 
 `forms` object keys are used as IDs in requests params.
 
-For security reasons you shouldn't keep **user** and **password** directly in the config file, but for example, keep them as a [secret variables](https://zeit.co/docs/v2/deployments/environment-variables-and-secrets/) if you are using [Now.sh](https://now.sh/).
+For security reasons you shouldn't keep **user** and **password** directly in the config file, but for example, keep them as a [secret variables](https://vercel.com/docs/environment-variables) if you are using [Vercel](https://vercel.com/).
 
 ## Local testing
 To test and expose mailer locally on your machine run `yarn dev` / `npm run dev`
