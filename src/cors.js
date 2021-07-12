@@ -18,6 +18,5 @@ module.exports = (request, response, config, isDev = false) => {
   if (request.method === 'OPTIONS') {
     response.statusCode = 204
     response.end()
-    return
   }
 }
