@@ -114,7 +114,6 @@
 </template>
 
 <script>
-
 export default {
   data() {
     return {
@@ -126,7 +125,7 @@ export default {
   },
   async mounted() {
     const { data } = await this.$axios.get(
-      `${process.env.api}`,
+      '/api/form',
       { params: { id: 'demo' } }
     )
     this.fields = data
@@ -151,7 +150,7 @@ export default {
       try {
         const { data } = await this.$axios({
           method: 'post',
-          url: `${process.env.api}`,
+          url: '/api/form',
           data: bodyFormData,
           headers: { 'Content-Type': 'multipart/form-data' },
           params: { id: 'demo' }

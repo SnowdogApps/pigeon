@@ -5,16 +5,17 @@
   "author": "Bartek Igielski",
   "private": true,
   "scripts": {
-    "dev": "concurrently \"cd api && yarn dev\" \"nuxt\" ",
+    "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore . --fix",
     "precommit": "npm run lint",
-    "now-build": "yarn generate"
+    "vercel-build": "nuxt generate"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
+    "@snowdog/pigeon": "^1.0.0",
     "cross-env": "^5.2.0",
     "nuxt": "^2.4.0",
     "nuxt-buefy": "^0.3.2"

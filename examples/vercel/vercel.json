@@ -1,9 +1,8 @@
 {
   "version": 2,
   "builds": [
-    { "src": "api/get.js", "use": "@now/node" },
-    { "src": "api/post.js", "use": "@now/node" },
-    { "use": "@now/static-build", "src": "package.json" }
+    { "src": "api/*.js", "use": "@vercel/node" },
+    { "src": "package.json", "use": "@vercel/static-build" }
   ],
   "routes": [
     { "src": "/api/form", "dest": "/api/get.js", "methods": ["GET"] },

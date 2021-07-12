@@ -4,10 +4,10 @@
 
 ``` bash
 # install dependencies
-$ yarn && cd api && yarn && cd ..
+$ yarn
 
 # serve with hot reload at localhost:3000
-$ yarn dev
+$ vercel dev
 ```
 
 For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).

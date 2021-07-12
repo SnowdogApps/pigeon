@@ -1,10 +1,5 @@
 export default {
   mode: 'spa',
-
-  env: {
-    api: process.env.NODE_ENV === 'development' ? 'http://localhost:8080' : '/api/form'
-  },
-
   /*
   ** Headers of the page
   */
