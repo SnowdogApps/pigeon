@@ -9,7 +9,7 @@ module.exports = (localConfig = {}, isDev = false) => async (request, response) 
     const config = await getConfig(id, localConfig, isDev)
 
     cors(request, response, config, isDev)
-    if (!request.writableEnded) {
+    if (!response.writableEnded) {
       await mailer(request, response, config, isDev)
     }
   } catch (err) {
